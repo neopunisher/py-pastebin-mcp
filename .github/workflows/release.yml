@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  pypi:
+    name: Build and publish to PyPI
+    runs-on: ubuntu-latest
+    # The trusted publisher configured on PyPI must name this environment.
+    environment: pypi
+    permissions:
+      contents: read
+      # Lets uv exchange a short-lived OIDC token for a PyPI API token,
+      # so no PyPI secret is stored in this repository.
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - uses: astral-sh/setup-uv@v10.3.0
+
+      - name: Build
+        run: uv build
+
+      - name: Check the built wheel starts and answers MCP initialize
+        run: uv run --no-project python scripts/smoke_test.py
+
+      - name: Publish
+        run: uv publish --trusted-publishing always
