@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{ name = "Carter", email = "carter.cole@gmail.com" }]
+authors = [{ name = "Carter", email = "carter@cartercole.com" }]
 keywords = ["mcp", "model-context-protocol", "pastebin", "fastmcp", "llm"]
 classifiers = [
     "Development Status :: 3 - Alpha",
